@@ -2,6 +2,8 @@
 """
 Created on Sun Sep 19 18:47:03 2021
 
+Fetch static HTML using python
+
 @author: Ethan
 """
 import requests
@@ -42,3 +44,15 @@ python_job_elements = [
     job.parent.parent.parent for job in python_jobs
 ]
 print(python_job_elements)
+
+# Extract Attributes from HTML elements
+for job_element in python_job_elements:
+    links = job_element.find_all("a", string="Apply")
+    for link in links:
+        link_url = link["href"]
+        print(f"Apply here: {link_url}", end="\n")
+        
+# get the same result as previous snip        
+for job_element in python_job_elements:
+    link_url = job_element.find_all("a")[1]["href"]
+    print(f"Apply here: {link_url}", end="\n")
